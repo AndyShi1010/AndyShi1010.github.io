@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Andy Shi</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <div id="loader">
+      <div id="loader-content">
+        <h1>Loading...</h1>
+      </div>
+    </div>
+    <div id="desktop">
+      <div id="background"></div>
+      <div id="hello-container">
+        <h1 class="hello-text" onclick="doThing()">Hello!</h1>
+        <h1 class="hello-text">My name is Andy!</h1>
+        <p id="description">I do nerd stuff, I guess. ¯\_(ツ)_/¯</p>
+      </div>
+      <script src="script.js"></script>
+
+      <div id="menubar">
+        <div class="menu-item" id="menu-item-about" onclick="openWindow(document.getElementById('window-about'));">About</div>
+        <div class="menu-item" id="menu-item-portfolio" onclick="openWindow(document.getElementById('window-portfolio'));">Portfolio</div>
+      </div>
+
+			<div class="window-container">
+
+				<div class="window" id="window-about">
+					<div class="window-frame">
+						<div class="resize-top"></div>
+						<div class="resize-right"></div>
+						<div class="resize-bottom"></div>
+						<div class="resize-left"></div>
+						<div class="window-titlebar" id="window-about-titlebar">
+							<p class="window-name">About</p>
+							<span class="material-icons" onclick="document.getElementById('window-about').classList.toggle('window-open');">close</span>
+						</div>
+					</div>
+					<div class="window-content">
+						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio quas inventore ex, laborum culpa sapiente nobis odio aspernatur ipsam fugiat.
+					</div>
+				</div>
+
+				<div class="window" id="window-portfolio">
+					<div class="window-titlebar" id="window-portfolio-titlebar">
+						<p class="window-name">Portfolio</p>
+						<span class="material-icons" onclick="document.getElementById('window-portfolio').classList.toggle('window-open');">close</span>
+					</div>
+      	</div>
+
+			</div>
+
+    </div>
+  </body>
+
+</html>

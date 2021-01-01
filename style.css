@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css?family=Arvo:400,700&display=swap');
+
+body {
+  margin: 0px;
+  font-family: 'Arvo', serif;
+  padding: 0px;
+  overflow: hidden;
+}
+
+#loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgb(0,0,0);
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  user-select: none;
+}
+
+#desktop {
+  opacity: 0;
+  transform: scale(1.25);
+  filter: blur(50px);
+  transition: 0.5s;
+}
+
+.desktop-visible {
+  filter: blur(0px) !important;
+  opacity: 1 !important;
+  transform: scale(1) !important;
+}
+
+#background {
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-image: url('back.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* animation-name: zoom; */
+  animation-duration: 60s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+#hello-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100vh;
+  width: 100vw;
+  white-space: nowrap;
+}
+
+.hello-text{
+  text-align: right;
+  z-index: 0;
+  margin: 0px;
+  margin-right: 100px;
+  padding: 10px;
+  background: white;
+  width: fit-content;
+  box-shadow: 0px 0px 8px rgba(0,0,0,0.1);
+  font-size: 48px;
+}
+
+#hello-container h1:first-of-type {
+  z-index: 1;
+  clip-path: inset(-20px -20px 0px -20px);
+}
+
+#description {
+  margin: 0;
+  margin-right: 100px;
+  margin-top: 40px;
+  font-size: 24px;
+  text-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+}
+
+#menubar {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  width: calc(100% - 32px);
+  bottom: 0px;
+  left: 0px;
+  padding: 8px 16px;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(20px);
+  z-index: 1000;
+}
+
+.menu-item {
+  padding: 12px;
+  background: rgba(255,255,255,0.8);
+  /* border: 1px solid rgba(0,0,0,0.5); */
+  width: 140px;
+  height: auto;
+  color: black;
+  text-decoration: none;
+  line-height: 1;
+  transition: 0.25s;
+  margin-right: 20px;
+  cursor: pointer;
+  user-select: none;
+  /* backdrop-filter: blur(10px); */
+}
+
+.menu-item:hover {
+  background: white;
+  color: black;
+}
+
+/* .menu-item:active {
+  box-shadow: inset 4px 4px 0px rgba(0,0,0,1);
+} */
+
+.window {
+  position: absolute;
+  background: white;
+  width: 640px;
+  height: 480px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+  z-index: 10;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.75);
+  transition: all 0s, opacity 0.2s, visibility 0.2s, transform 0.2s;
+}
+
+#window-about {
+  top: 200px;
+  left: 200px;
+}
+
+
+#window-portfolio {
+  top: 240px;
+  left: 240px;
+}
+
+.window-open {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: scale(1) !important;
+}
+
+.window-titlebar {
+  width: 100%;
+  background: rgb(10,10,10);
+  transition: 0.2s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.window-titlebar:hover {
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.25);
+  cursor: move;
+}
+
+.window-titlebar p {
+  margin: 0px;
+  padding: 12px;
+  width: fit-content;
+  /* background: blue; */
+  color: white;
+  user-select: none;
+}
+
+.window-titlebar span {
+  padding: 12px;
+  cursor: pointer;
+  background: rgb(10,10,10);
+  color: white;
+  user-select: none;
+	font-size: 20px;
+  /* border: 1px solid black; */
+}
+
+.window-titlebar span:hover {
+  background: rgb(30,30,30);
+}
+
+.resize-top, .resize-right, .resize-bottom, .resize-left {
+  background: transparent;
+  position: absolute;
+  transition: 0.2s;
+}
+
+.resize-top:hover, .resize-right:hover, .resize-bottom:hover, .resize-left:hover {
+  background: rgba(0,0,0,0.2);
+} 
+
+.resize-top {
+  width: 100%;
+  height: 5px;
+  margin-top: -5px;
+  cursor: ns-resize;
+}
+
+.resize-right {
+  width: 5px;
+  height: 100%;
+  right: 0;
+  margin-right: -5px;
+  cursor: ew-resize;
+}
+
+.resize-bottom {
+  width: 100%;
+  height: 5px;
+  bottom: 0;
+  margin-bottom: -5px;
+  cursor: ns-resize;
+}
+
+.resize-left {
+  width: 5px;
+  height: 100%;
+  margin-left: -5px;
+  cursor: ew-resize;
+}
