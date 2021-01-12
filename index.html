@@ -6,12 +6,14 @@
     <title>Andy Shi</title>
     <link href="style.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="script.js"></script>
   </head>
 
   <body>
-    <div id="loader">
+    <div id="loader" class="not-loaded">
       <div id="loader-content">
         <h1>Loading...</h1>
+        <span id='loading-bar'></span>
       </div>
     </div>
     <div id="desktop">
@@ -21,35 +23,60 @@
         <h1 class="hello-text">My name is Andy!</h1>
         <p id="description">I do nerd stuff, I guess. ¯\_(ツ)_/¯</p>
       </div>
-      <script src="script.js"></script>
 
       <div id="menubar">
-        <div class="menu-item" id="menu-item-about" onclick="openWindow(document.getElementById('window-about'));">About</div>
-        <div class="menu-item" id="menu-item-portfolio" onclick="openWindow(document.getElementById('window-portfolio'));">Portfolio</div>
+        <div class="menu-item" id="menu-item-about" onclick="toggleWindow(1);">About</div>
+        <div class="menu-item" id="menu-item-code" onclick="toggleWindow(2);">Code</div>
+        <div class="menu-item" id="menu-item-design" onclick="toggleWindow(3);">Design</div>
       </div>
 
 			<div class="window-container">
 
-				<div class="window" id="window-about">
+				<div class="window" id="window-1" onmousedown="bringWindowForward(1);">
 					<div class="window-frame">
-						<div class="resize-top"></div>
+						<!-- <div class="resize-top"></div>
 						<div class="resize-right"></div>
 						<div class="resize-bottom"></div>
-						<div class="resize-left"></div>
+						<div class="resize-left"></div> -->
 						<div class="window-titlebar" id="window-about-titlebar">
 							<p class="window-name">About</p>
-							<span class="material-icons" onclick="document.getElementById('window-about').classList.toggle('window-open');">close</span>
+							<span class="material-icons" onclick="toggleWindow(1)">close</span>
 						</div>
 					</div>
 					<div class="window-content">
-						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio quas inventore ex, laborum culpa sapiente nobis odio aspernatur ipsam fugiat.
+            Hi! My name is Andy Shi and I am a Computer Science student at San Francisco State University.
 					</div>
 				</div>
 
-				<div class="window" id="window-portfolio">
-					<div class="window-titlebar" id="window-portfolio-titlebar">
-						<p class="window-name">Portfolio</p>
-						<span class="material-icons" onclick="document.getElementById('window-portfolio').classList.toggle('window-open');">close</span>
+				<div class="window" id="window-2" onmousedown="bringWindowForward(2);">
+          <div class="window-frame">
+						<!-- <div class="resize-top"></div>
+						<div class="resize-right"></div>
+						<div class="resize-bottom"></div>
+						<div class="resize-left"></div> -->
+						<div class="window-titlebar" id="window-code-titlebar">
+              <p class="window-name">Code</p>
+              <span class="material-icons" onclick="toggleWindow(2)">close</span>
+            </div>
+          </div>
+          <div class="window-content">
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas iure ipsam ducimus laudantium esse. Molestiae accusantium nisi commodi veniam placeat tenetur nobis, animi facilis quia illo quae. Repellat, laboriosam recusandae!
+					</div>
+        </div>
+        
+        <div class="window" id="window-3" onmousedown="bringWindowForward(3);">
+          <div class="window-frame">
+						<!-- <div class="resize-top"></div>
+						<div class="resize-right"></div>
+						<div class="resize-bottom"></div>
+						<div class="resize-left"></div> -->
+						<div class="window-titlebar" id="window-design-titlebar">
+              <p class="window-name">Design</p>
+              <span class="material-icons" onclick="toggleWindow(3)">close</span>
+            </div>
+          </div>
+          <div class="window-content">
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas vel doloremque pariatur voluptatibus delectus dolores, quia officiis soluta incidunt, possimus at neque quam dolorem molestias sed reprehenderit, modi deserunt animi!
 					</div>
       	</div>
 
