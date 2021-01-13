@@ -299,17 +299,30 @@ body {
   height: calc(100% - 40px);
 }
 
+@media only screen and (max-width: 640px) {
+  #window-1, #window-2, #window-3{
+    top: 0px !important;
+    left: 0px !important;
+    width: 100vw !important;
+    height: 100vh !important;
+  }
+}
+
 #window-1 {
-  top: clamp(0px, 20vh, calc(100vw - 80px));
-  left: clamp(0px, 10vw, calc(100vw - 80px));
+  top: clamp(0px, 15vh, calc(100vw - 80px));
+  left: clamp(0px, 5vw, calc(100vw - 80px));
 }
 
 #window-2 {
-  top: clamp(0px, calc(20vh + 40px), calc(100vw - 80px));
-  left: clamp(0px, calc(10vw + 40px), calc(100vw - 80px));
+  width: clamp(230px, 60vw, 720px);
+  height: clamp(360px, 30vw, 720px);
+  top: clamp(0px, calc(5vh + 40px), calc(100vw - 80px));
+  left: clamp(0px, calc(20vw + 40px), calc(100vw - 80px));
 }
 
 #window-3 {
-  top: clamp(0px, calc(10vh + 40px), calc(100vw - 80px));
-  left: clamp(0px, calc(30vw + 40px), calc(100vw - 80px));
+  width: clamp(230px, 55vw, 720px);
+  height: clamp(360px, 25vw, 720px);
+  top: clamp(0px, calc(30vh + 40px), calc(100vw - 80px));
+  left: clamp(0px, calc(25vw + 40px), calc(100vw - 80px));
 }
