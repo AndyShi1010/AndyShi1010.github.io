@@ -2,9 +2,22 @@ function doThing () {
   console.log('Hello!');
 }
 
+let mobileView = true;
+
+if (!(navigator.userAgent.match(/Android/i)
+ || navigator.userAgent.match(/webOS/i)
+ || navigator.userAgent.match(/iPhone/i)
+ || navigator.userAgent.match(/iPad/i)
+ || navigator.userAgent.match(/iPod/i)
+ || navigator.userAgent.match(/BlackBerry/i)
+ || navigator.userAgent.match(/Windows Phone/i))) {
+  mobileView = false;
+ }
+
 // let windows = [];
 const minWindowZ = 10;
 let openedWindows = [];
+
 
 let windowObjs = document.getElementsByClassName("window");
 
@@ -16,38 +29,51 @@ window.onload = function() {
   setTimeout(function(){  
     toggleWindow(1);
   }, 2500);
-  for (i = 0; i < windowObjs.length; i++) {
-    windowDrag(windowObjs[i], windowObjs[i].querySelector(".window-titlebar"));
+  if (!mobileView) {
+    for (i = 0; i < windowObjs.length; i++) {
+      windowDrag(windowObjs[i], windowObjs[i].querySelector(".window-titlebar"));
+    }
   }
 }
 
 function toggleWindow(id) {
-  if (document.getElementById(`window-${id}`).classList.contains("window-open")) {
-    document.getElementById(`window-${id}`).classList.remove("window-open");
-    console.log("Closing window");
-    closeWindow(id);
-  } else {
+  if (mobileView || window.innerWidth < 680) {
+    for (i = 0; i < windowObjs.length; i++) {
+      windowObjs[i].classList.remove("window-open");
+    }
     document.getElementById(`window-${id}`).classList.add("window-open");
-    console.log("Opening window");
-    openWindow(id);
+  } else {
+    if (document.getElementById(`window-${id}`).classList.contains("window-open")) {
+      // document.getElementById(`window-${id}`).classList.remove("window-open");
+      console.log("Closing window");
+      closeWindow(id);
+    } else {
+      // document.getElementById(`window-${id}`).classList.add("window-open");
+      console.log("Opening window");
+      openWindow(id);
+    }
   }
+
+  
 }
 
 function openWindow(id) {
+  document.getElementById(`window-${id}`).classList.add("window-open");
   openedWindows.push(id);
   console.log(openedWindows);
   updateWindowOrder();
 }
 
 function closeWindow(id) {
+  document.getElementById(`window-${id}`).classList.remove("window-open");
   // if (openedWindows && openedWindows.length != 0) {
-    for (i = 0; i < openedWindows.length; i++) {
-      if (openedWindows[i] == id) {
-        openedWindows.splice(i, 1);
-      }
+  for (i = 0; i < openedWindows.length; i++) {
+    if (openedWindows[i] == id) {
+      openedWindows.splice(i, 1);
     }
-    console.log(openedWindows);
-    updateWindowOrder()
+  }
+  console.log(openedWindows);
+  updateWindowOrder()
   // }
 }
 

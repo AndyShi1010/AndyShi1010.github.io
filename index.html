@@ -14,6 +14,7 @@
       <div id="loader-content">
         <h1>Loading...</h1>
         <span id='loading-bar'></span>
+        <p>Site under construction.</p>
       </div>
     </div>
     <div id="desktop">
@@ -30,33 +31,39 @@
         <div class="menu-item" id="menu-item-design" onclick="toggleWindow(3);">Design</div>
       </div>
 
+      <!-- <div id="menubar-mobile">
+        <div class="mobile-menu-item" id="menu-item-about" onclick="toggleWindow(1);">About</div>
+        <div class="mobile-menu-item" id="menu-item-code" onclick="toggleWindow(2);">Code</div>
+        <div class="mobile-menu-item" id="menu-item-design" onclick="toggleWindow(3);">Design</div>
+      </div> -->
+
 			<div class="window-container">
 
 				<div class="window" id="window-1" onmousedown="bringWindowForward(1);">
 					<div class="window-frame">
-						<!-- <div class="resize-top"></div>
-						<div class="resize-right"></div>
-						<div class="resize-bottom"></div>
-						<div class="resize-left"></div> -->
 						<div class="window-titlebar" id="window-about-titlebar">
 							<p class="window-name">About</p>
-							<span class="material-icons" onclick="toggleWindow(1)">close</span>
+							<span class="material-icons" onclick="closeWindow(1)">close</span>
 						</div>
 					</div>
 					<div class="window-content">
-            Hi! My name is Andy Shi and I am a Computer Science student at San Francisco State University.
+            <div id="about-intro-box">
+              <img src="assets/face.png" id="about-face">
+              <p class="window-content-text">
+                Hi! My name is <strong>Andy Shi</strong> and I am a Computer Science student at San Francisco State University.
+              </p>
+            </div>
+            <p>
+              I am coder with a strong interest in user interface design. I have experience in Java, HTML, CSS, and Javascript. While I knowledgeable of both front end and back end web development, I primarily enjoy working on front end development.
+            </p>
 					</div>
 				</div>
 
 				<div class="window" id="window-2" onmousedown="bringWindowForward(2);">
           <div class="window-frame">
-						<!-- <div class="resize-top"></div>
-						<div class="resize-right"></div>
-						<div class="resize-bottom"></div>
-						<div class="resize-left"></div> -->
 						<div class="window-titlebar" id="window-code-titlebar">
               <p class="window-name">Code</p>
-              <span class="material-icons" onclick="toggleWindow(2)">close</span>
+              <span class="material-icons" onclick="closeWindow(2)">close</span>
             </div>
           </div>
           <div class="window-content">
@@ -66,13 +73,9 @@
         
         <div class="window" id="window-3" onmousedown="bringWindowForward(3);">
           <div class="window-frame">
-						<!-- <div class="resize-top"></div>
-						<div class="resize-right"></div>
-						<div class="resize-bottom"></div>
-						<div class="resize-left"></div> -->
 						<div class="window-titlebar" id="window-design-titlebar">
               <p class="window-name">Design</p>
-              <span class="material-icons" onclick="toggleWindow(3)">close</span>
+              <span class="material-icons" onclick="closeWindow(3)">close</span>
             </div>
           </div>
           <div class="window-content">
