@@ -228,7 +228,7 @@ body {
   cursor: move;
 }
 
-.window-titlebar p.window-name {
+.window-titlebar h2.window-name {
   margin: 0px;
   padding: 12px;
   width: fit-content;
@@ -236,6 +236,7 @@ body {
   color: white;
   user-select: none;
   font-size: 16px;
+  font-weight: normal;
   line-height: 1;
 }
 
@@ -253,7 +254,7 @@ body {
   background: rgb(30,30,30);
 }
 
-.window-frame .resize-top, .window-frame .resize-right, .window-frame .resize-bottom, .window-frame .resize-left {
+/* .window-frame .resize-top, .window-frame .resize-right, .window-frame .resize-bottom, .window-frame .resize-left {
   background: transparent;
   position: absolute;
   transition: 0.2s;
@@ -291,13 +292,31 @@ body {
   height: 100%;
   margin-left: -5px;
   cursor: ew-resize;
-}
+} */
 
 .window-content {
   padding: 20px;
-  line-height: 1.5;
   overflow-y: auto;
   height: calc(100% - 40px);
+}
+
+.window-content p {
+  font-family: 'Source Sans Pro', sans-serif;
+  line-height: 1.75;
+}
+
+.window-content h3 {
+  font-family: 'Arvo', serif;
+  font-size: 22px;
+  line-height: 1;
+  margin: 20px 0px;
+}
+
+.window-content h4 {
+  font-family: 'Arvo', serif;
+  font-size: 16px;
+  line-height: 1;
+  margin: 20px 0px;
 }
 
 @media only screen and (max-width: 680px) {
