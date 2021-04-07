@@ -1,7 +1,3 @@
-function doThing () {
-  console.log('Hello!');
-}
-
 let mobileView = true;
 
 if (!(navigator.userAgent.match(/Android/i)
@@ -19,6 +15,7 @@ const minWindowZ = 10;
 let openedWindows = [];
 
 
+
 let windowObjs = document.getElementsByClassName("window");
 
 window.onload = function() {
@@ -34,6 +31,13 @@ window.onload = function() {
       windowDrag(windowObjs[i], windowObjs[i].querySelector(".window-titlebar"));
     }
   }
+  setInterval(function(){
+    console.log("Run");
+    let time = new Date();
+    document.querySelector("#menubar-clock").innerHTML = time.toLocaleTimeString("en-US");
+  }, 500);
+  // document.querySelector("#menubar-clock").innerHTML = `${time.getHours()}:${time.getMinutes()} ${time.getHours() >= 12 ? "PM": "AM"}`;
+
 }
 
 function toggleWindow(id) {
@@ -111,10 +115,14 @@ function windowDrag(windowElement, draggableElement) {
   function elementDrag(e) {
     e = e || window.event;
     e.preventDefault();
-    offsetX = mouseX - e.clientX;
-    offsetY = mouseY - e.clientY;
-    mouseX = e.clientX;
-    mouseY = e.clientY;
+    if (e.clientX >= 0 && e.clientY >= 0) {
+      offsetX = mouseX - e.clientX;
+      offsetY = mouseY - e.clientY;
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      windowElement.style.left = `clamp(0px, ${(windowElement.offsetLeft - offsetX)}px, calc(100vw - 80px)`;
+      windowElement.style.top = `clamp(0px, ${(windowElement.offsetTop - offsetY)}px, calc(100vh - 80px))`;
+    }
     // if ((elmnt.offsetTop - offsetY) < 0) {
     //   elmnt.style.top = 0 + "px";
     // }
@@ -123,8 +131,6 @@ function windowDrag(windowElement, draggableElement) {
     // } else {
       // windowElement.style.left = `max(0px,${(windowElement.offsetLeft - offsetX)}px`;
       // windowElement.style.top = `max(0px,${(windowElement.offsetTop - offsetY)}px`;
-      windowElement.style.left = `clamp(0px, ${(windowElement.offsetLeft - offsetX)}px, calc(100vw - 80px)`;
-      windowElement.style.top = `clamp(0px, ${(windowElement.offsetTop - offsetY)}px, calc(100vh - 80px))`;
     // }
   }
   function closeDragElement() {
@@ -151,3 +157,12 @@ function windowDrag(windowElement, draggableElement) {
 //   // console.log(windows.length + ": " + windows[windows.length - 1].id);
 // }
 
+window.onresize = function() {
+  let window1width = document.getElementById("window-1").querySelector(".window-content").clientWidth;
+  if (window1width < 360) {
+    document.getElementById("about-intro-box").style.flexDirection = "column";
+  } else {
+    document.getElementById("about-intro-box").style.flexDirection = "row";
+  }
+  console.log(window1width);
+}
