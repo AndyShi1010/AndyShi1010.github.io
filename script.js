@@ -8,13 +8,11 @@ if (!(navigator.userAgent.match(/Android/i)
  || navigator.userAgent.match(/BlackBerry/i)
  || navigator.userAgent.match(/Windows Phone/i))) {
   mobileView = false;
- }
+}
 
 // let windows = [];
 const minWindowZ = 10;
 let openedWindows = [];
-
-
 
 let windowObjs = document.getElementsByClassName("window");
 
@@ -22,26 +20,39 @@ window.onload = function() {
   setTimeout(function(){  
     document.getElementById("loader").classList.toggle("not-loaded");
     document.getElementById("desktop").classList.toggle("desktop-visible");
-  }, 2000);
+  }, 20);
   setTimeout(function(){  
     toggleWindow(1);
-  }, 2500);
+  }, 25);
+  let window1width = document.getElementById("window-1").querySelector(".window-content").clientWidth;
+  let window2width = document.getElementById("window-2").querySelector(".window-content").clientWidth;
+  updateWindow1(window1width);
+  updateWindow2(window2width);
   if (!mobileView) {
-    for (i = 0; i < windowObjs.length; i++) {
-      windowDrag(windowObjs[i], windowObjs[i].querySelector(".window-titlebar"));
-    }
+    initDesktopMode();
+  } else {
+    document.querySelector(".window-container").insertAdjacentHTML('beforebegin', 
+    `
+    <div id="menubar-mobile">
+      <div id="menubar-links">
+        <div class="menu-item" id="menu-item-1" onclick="toggleWindow(1);"><span class="material-icons">person</span>About</div>
+        <div class="menu-item" id="menu-item-2" onclick="toggleWindow(2);">Code</div>
+        <div class="menu-item" id="menu-item-3" onclick="toggleWindow(3);">Design</div>
+      </div>
+    </div>
+    `);
+    // initMobileMode();
+    // document.getElementById("window-1").style.top = "0px !important";
+    // document.getElementById("window-1").style.left = "0px !important";
+    // document.getElementById("window-1").style.width = "100vw !important";
+    // document.getElementById("window-1").style.height = "100vh !important";
   }
-  setInterval(function(){
-    console.log("Run");
-    let time = new Date();
-    document.querySelector("#menubar-clock").innerHTML = time.toLocaleTimeString("en-US");
-  }, 500);
   // document.querySelector("#menubar-clock").innerHTML = `${time.getHours()}:${time.getMinutes()} ${time.getHours() >= 12 ? "PM": "AM"}`;
 
 }
 
 function toggleWindow(id) {
-  if (mobileView || window.innerWidth < 680) {
+  if (mobileView) {
     for (i = 0; i < windowObjs.length; i++) {
       windowObjs[i].classList.remove("window-open");
     }
@@ -70,6 +81,8 @@ function openWindow(id) {
 
 function closeWindow(id) {
   document.getElementById(`window-${id}`).classList.remove("window-open");
+  document.getElementById(`menu-item-${id}`).classList.remove("focus");
+  document.getElementById(`menu-item-${id}`).classList.remove("back");
   // if (openedWindows && openedWindows.length != 0) {
   for (i = 0; i < openedWindows.length; i++) {
     if (openedWindows[i] == id) {
@@ -87,9 +100,13 @@ function updateWindowOrder() {
     openedWindows.forEach(element => {
       document.getElementById(`window-${element}`).style.zIndex = zIndex;
       document.getElementById(`window-${element}`).classList.add("out-of-focus");
+      document.getElementById(`menu-item-${element}`).classList.remove("focus");
+      document.getElementById(`menu-item-${element}`).classList.add("back");
       zIndex++;
     });
     document.getElementById(`window-${openedWindows[openedWindows.length - 1]}`).classList.remove("out-of-focus");
+    document.getElementById(`menu-item-${openedWindows[openedWindows.length - 1]}`).classList.remove("focus");
+    document.getElementById(`menu-item-${openedWindows[openedWindows.length - 1]}`).classList.add("focus");
   }
   // console.log(openedWindows[openedWindows.length - 1])
 }
@@ -139,8 +156,6 @@ function windowDrag(windowElement, draggableElement) {
   }
 }
 
-
-
 // function openWindow(windowElement) {
 // 	windows.push(windowElement);
 //   windowElement.classList.toggle('window-open');
@@ -159,10 +174,53 @@ function windowDrag(windowElement, draggableElement) {
 
 window.onresize = function() {
   let window1width = document.getElementById("window-1").querySelector(".window-content").clientWidth;
-  if (window1width < 360) {
+  let window2width = document.getElementById("window-2").querySelector(".window-content").clientWidth;
+  updateWindow1(window1width);
+  updateWindow2(window2width);
+  console.log(window1width);
+}
+
+function updateWindow1(width) {
+  if (width < 360) {
     document.getElementById("about-intro-box").style.flexDirection = "column";
   } else {
     document.getElementById("about-intro-box").style.flexDirection = "row";
   }
-  console.log(window1width);
 }
+
+function updateWindow2(width) {
+  if (width < 360) {
+    document.getElementById("code-collage-container").style.gridTemplateColumns = "auto";
+  } else if (width < 540) {
+    document.getElementById("code-collage-container").style.gridTemplateColumns = "auto auto";
+  } else {
+    document.getElementById("code-collage-container").style.gridTemplateColumns = "auto auto auto";
+  }
+}
+
+function initDesktopMode() {
+  for (i = 0; i < windowObjs.length; i++) {
+    windowDrag(windowObjs[i], windowObjs[i].querySelector(".window-titlebar"));
+    windowObjs[i].classList.add("desktop");
+  }
+  document.querySelector(".window-container").insertAdjacentHTML('beforebegin', 
+  `
+  <div id="menubar-desktop">
+    <div id="menubar-links">
+      <div class="menu-item" id="menu-item-1" onclick="toggleWindow(1);"><span class="material-icons">person</span>About</div>
+      <div class="menu-item" id="menu-item-2" onclick="toggleWindow(2);"><span class="material-icons">code</span>Code</div>
+      <div class="menu-item" id="menu-item-3" onclick="toggleWindow(3);"><span class="material-icons">design_services</span>Design</div>
+    </div>
+  </div>
+  `);
+  document.getElementById("menubar-links").insertAdjacentHTML('afterend', '<p id="menubar-clock"></p>');
+  setInterval(function(){
+    // console.log("Run");
+    let time = new Date();
+    document.querySelector("#menubar-clock").innerHTML = time.toLocaleTimeString("en-US");
+  }, 500);
+}
+
+
+
+
