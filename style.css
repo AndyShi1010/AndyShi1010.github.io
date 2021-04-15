@@ -163,7 +163,7 @@ body {
 }
 
 .menu-item {
-  padding: 12px 12px 10px 12px;
+  padding: 9px 12px 7px 12px;
   /* border: 1px solid rgba(0,0,0,0.5); */
   line-height: 1;
   transition: 0.25s;
@@ -172,6 +172,7 @@ body {
   user-select: none;
   border: 0px solid transparent;
   border-bottom: 2px solid transparent;
+  color: white;
   /* backdrop-filter: blur(10px); */
 }
 
@@ -179,6 +180,13 @@ body {
   width: 140px;
   text-decoration: none;
   margin-right: 9px;
+  display: flex;
+  align-items: center;
+}
+
+#menubar-desktop .menu-item span {
+  margin-right: 12px;
+  font-size: 20px;
 }
 
 #menubar-desktop .menu-item:last-of-type {
