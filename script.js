@@ -21,36 +21,213 @@ window.onload = function() {
     document.getElementById("loader").classList.toggle("not-loaded");
     document.getElementById("desktop").classList.toggle("desktop-visible");
   }, 20);
-  setTimeout(function(){  
-    toggleWindow(1);
-  }, 25);
   let window1width = document.getElementById("window-1").querySelector(".window-content").clientWidth;
   let window2width = document.getElementById("window-2").querySelector(".window-content").clientWidth;
   updateWindow1(window1width);
   updateWindow2(window2width);
   if (!mobileView) {
     initDesktopMode();
+    setTimeout(function(){  
+      openWindow(1);
+    }, 25);
   } else {
-    document.querySelector(".window-container").insertAdjacentHTML('beforebegin', 
+    initMobileMode();
+    openWindow(4);
+  }
+}
+
+function initMobileMode() {
+  document.querySelector(".window-container").insertAdjacentHTML('beforebegin', 
     `
-    <div id="menubar-mobile">
+    <div class="menubar" id="menubar-mobile">
       <div id="menubar-links">
-        <div class="menu-item" id="menu-item-1" onclick="toggleWindow(1);"><span class="material-icons">person</span>About</div>
-        <div class="menu-item" id="menu-item-2" onclick="toggleWindow(2);">Code</div>
-        <div class="menu-item" id="menu-item-3" onclick="toggleWindow(3);">Design</div>
+        <div class="menu-item" id="menu-item-4" onclick="openWindow(4);"><span class="material-icons">home</span>Test</div>
+        <div class="menu-item" id="menu-item-1" onclick="openWindow(1);"><span class="material-icons">person</span>About</div>
+        <div class="menu-item" id="menu-item-2" onclick="openWindow(2);">Code</div>
+        <div class="menu-item" id="menu-item-3" onclick="openWindow(3);">Design</div>
       </div>
     </div>
     `);
-    // initMobileMode();
-    // document.getElementById("window-1").style.top = "0px !important";
-    // document.getElementById("window-1").style.left = "0px !important";
-    // document.getElementById("window-1").style.width = "100vw !important";
-    // document.getElementById("window-1").style.height = "100vh !important";
-  }
-  // document.querySelector("#menubar-clock").innerHTML = `${time.getHours()}:${time.getMinutes()} ${time.getHours() >= 12 ? "PM": "AM"}`;
 
+    for (let i = 0; i < windowObjs.length; i++) {
+      windowObjs[i].classList.add("mobile");
+      windowObjs[i].style.height = "calc(100vh - " + document.getElementById("menubar-mobile").clientHeight + "px)";
+    }
 }
 
+function initDesktopMode() {
+  
+  // for (i = 0; i < windowObjs.length; i++) {
+  //   windowObjs[i].classList.add("desktop");
+  //   // windowObjs[i].getElementsByClassName("window-content")[0].addEventListener("mousedown",  focusWindow(i));
+  // }
+  for (let i = 0; i < windowObjs.length; i++) {
+    windowObjs[i].classList.add("desktop");
+    windowObjs[i].onmousedown = function() {
+      focusWindow(i + 1);
+    };
+    windowDrag(windowObjs[i], windowObjs[i].querySelector(".window-titlebar"));
+    windowObjs[i].querySelector(".window-titlebar").insertAdjacentHTML('afterend', `
+    <span class="material-icons" onclick="closeWindow(${i + 1})">close</span>
+    `);
+    //console.log(windowObjs[i].getElementsByClassName("window-content"));
+  }
+  document.querySelector(".window-container").insertAdjacentHTML('beforebegin', 
+  `
+  <div class="menubar" id="menubar-desktop">
+    <div id="menubar-links">
+      <div class="menu-item" id="menu-item-1" onclick="menuItemClick(1);"><span class="material-icons">person</span>About</div>
+      <div class="menu-item" id="menu-item-2" onclick="menuItemClick(2);"><span class="material-icons">code</span>Code</div>
+      <div class="menu-item" id="menu-item-3" onclick="menuItemClick(3);"><span class="material-icons">design_services</span>Design</div>
+    </div>
+  </div>
+  `);
+  document.getElementById("menubar-links").insertAdjacentHTML('afterend', '<p id="menubar-clock"></p>');
+  setInterval(function(){
+    // console.log("Run");
+    let time = new Date();
+    document.querySelector("#menubar-clock").innerHTML = time.toLocaleTimeString("en-US");
+  }, 500);
+}
+
+function openWindow(id) {
+  if (!openedWindows.includes(id)) {
+    openedWindows.push(id);
+  } else {
+    focusWindow(id);
+  }
+  updateWindows();
+  updateMenu();
+}
+
+function closeWindow(id) {
+  if (openedWindows.includes(id)) {
+    for (i = 0; i < openedWindows.length; i++) {
+      if (openedWindows[i] == id) {
+        openedWindows.splice(i, 1);
+      }
+    }
+  }
+  updateWindows();
+  updateMenu();
+}
+
+function focusWindow(id) {
+  if (openedWindows.includes(id)) {
+    for (i = 0; i < openedWindows.length; i++) {
+      if (openedWindows[i] == id) {
+        openedWindows.splice(i, 1);
+      }
+    }
+    openedWindows.push(id);
+  }
+  updateWindows();
+  updateMenu();
+}
+
+function menuItemClick(id) {
+  if (document.getElementById(`menu-item-${id}`).classList.contains("back")) {
+    focusWindow(id);
+  } 
+  else if (document.getElementById(`menu-item-${id}`).classList.contains("focus")) {
+    closeWindow(id);
+  } 
+  else {
+    openWindow(id);
+  }
+}
+
+function updateWindows() {
+  var zIndex = minWindowZ;
+  //console.log("Update: " + openedWindows);
+  for (i = 0; i < windowObjs.length; i++) {
+    windowObjs[i].classList.remove("focus");
+    windowObjs[i].classList.remove("back");
+  }
+  if (openedWindows && openedWindows.length != 0) {
+    for (i = 0; i < openedWindows.length - 1; i++) {
+      document.getElementById(`window-${openedWindows[i]}`).style.zIndex = zIndex;
+      document.getElementById(`window-${openedWindows[i]}`).classList.add("back");
+      zIndex++;
+    }
+    document.getElementById(`window-${openedWindows[openedWindows.length-1]}`).style.zIndex = zIndex;
+    document.getElementById(`window-${openedWindows[openedWindows.length-1]}`).classList.add("focus");
+  }
+  // if (openedWindows && openedWindows.length != 0) {
+  //   openedWindows.forEach(element => {
+  //     document.getElementById(`window-${element}`).style.zIndex = zIndex;
+  //     document.getElementById(`window-${element}`).classList.add("background");
+  //     document.getElementById(`menu-item-${element}`).classList.remove("focus");
+  //     document.getElementById(`menu-item-${element}`).classList.add("back");
+  //     zIndex++;
+  //   });
+  //   document.getElementById(`window-${openedWindows[openedWindows.length - 1]}`).classList.remove("out-of-focus");
+  //   document.getElementById(`menu-item-${openedWindows[openedWindows.length - 1]}`).classList.remove("focus");
+  //   document.getElementById(`menu-item-${openedWindows[openedWindows.length - 1]}`).classList.add("focus");
+  // }
+}
+
+function updateMenu(){
+  let menuObjs = document.getElementsByClassName("menu-item");
+  for (i = 0; i < menuObjs.length; i++) {
+    menuObjs[i].classList.remove("focus");
+    menuObjs[i].classList.remove("back");
+  }
+  if (openedWindows && openedWindows.length != 0) {
+    for (i = 0; i < openedWindows.length; i++) {
+      if (document.getElementById(`window-${openedWindows[i]}`).classList.contains("back")) {
+        document.getElementById(`menu-item-${openedWindows[i]}`).classList.add("back");
+      } 
+      else if (document.getElementById(`window-${openedWindows[i]}`).classList.contains("focus")) {
+        document.getElementById(`menu-item-${openedWindows[i]}`).classList.add("focus");
+      } 
+    }
+  }
+}
+
+// function menuClicked(id) {
+//   if ()
+// }
+
+// function titlebarMouseDown(id) {
+//   // mouseInitX = e.clientX;
+//   // mouseInitY = e.clientY;
+//   e = e || window.event;
+//   e.preventDefault();
+//   console.log("Event:" + e.clientX);
+// }
+
+function windowDrag(windowElement, draggableElement) {
+  var offsetX = 0, offsetY = 0, mouseX = 0, mouseY = 0;
+  if (draggableElement) {
+    draggableElement.onmousedown = dragMouseDown;
+  }
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    document.onmouseup = closeDragElement;
+    document.onmousemove = elementDrag;
+  }
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    if (e.clientX >= 0 && e.clientY >= 0) {
+      offsetX = mouseX - e.clientX;
+      offsetY = mouseY - e.clientY;
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      windowElement.style.left = `clamp(0px, ${(windowElement.offsetLeft - offsetX)}px, calc(100vw - 80px)`;
+      windowElement.style.top = `clamp(0px, ${(windowElement.offsetTop - offsetY)}px, calc(100vh - 80px))`;
+    }
+  }
+  function closeDragElement() {
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+/*
 function toggleWindow(id) {
   if (mobileView) {
     for (i = 0; i < windowObjs.length; i++) {
@@ -69,7 +246,6 @@ function toggleWindow(id) {
     }
   }
 
-  
 }
 
 function openWindow(id) {
@@ -116,45 +292,8 @@ function bringWindowForward(id) {
   openWindow(id);
 }
 
-function windowDrag(windowElement, draggableElement) {
-  var offsetX = 0, offsetY = 0, mouseX = 0, mouseY = 0;
-  if (draggableElement) {
-    draggableElement.onmousedown = dragMouseDown;
-  }
-  function dragMouseDown(e) {
-    e = e || window.event;
-    e.preventDefault();
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    document.onmouseup = closeDragElement;
-    document.onmousemove = elementDrag;
-  }
-  function elementDrag(e) {
-    e = e || window.event;
-    e.preventDefault();
-    if (e.clientX >= 0 && e.clientY >= 0) {
-      offsetX = mouseX - e.clientX;
-      offsetY = mouseY - e.clientY;
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      windowElement.style.left = `clamp(0px, ${(windowElement.offsetLeft - offsetX)}px, calc(100vw - 80px)`;
-      windowElement.style.top = `clamp(0px, ${(windowElement.offsetTop - offsetY)}px, calc(100vh - 80px))`;
-    }
-    // if ((elmnt.offsetTop - offsetY) < 0) {
-    //   elmnt.style.top = 0 + "px";
-    // }
-    // if ((elmnt.offsetLeft - offsetX) < 0) {
-    //   elmnt.style.left = 0 + "px";
-    // } else {
-      // windowElement.style.left = `max(0px,${(windowElement.offsetLeft - offsetX)}px`;
-      // windowElement.style.top = `max(0px,${(windowElement.offsetTop - offsetY)}px`;
-    // }
-  }
-  function closeDragElement() {
-    document.onmouseup = null;
-    document.onmousemove = null;
-  }
-}
+*/
+
 
 // function openWindow(windowElement) {
 // 	windows.push(windowElement);
@@ -196,29 +335,6 @@ function updateWindow2(width) {
   } else {
     document.getElementById("code-collage-container").style.gridTemplateColumns = "auto auto auto";
   }
-}
-
-function initDesktopMode() {
-  for (i = 0; i < windowObjs.length; i++) {
-    windowDrag(windowObjs[i], windowObjs[i].querySelector(".window-titlebar"));
-    windowObjs[i].classList.add("desktop");
-  }
-  document.querySelector(".window-container").insertAdjacentHTML('beforebegin', 
-  `
-  <div id="menubar-desktop">
-    <div id="menubar-links">
-      <div class="menu-item" id="menu-item-1" onclick="toggleWindow(1);"><span class="material-icons">person</span>About</div>
-      <div class="menu-item" id="menu-item-2" onclick="toggleWindow(2);"><span class="material-icons">code</span>Code</div>
-      <div class="menu-item" id="menu-item-3" onclick="toggleWindow(3);"><span class="material-icons">design_services</span>Design</div>
-    </div>
-  </div>
-  `);
-  document.getElementById("menubar-links").insertAdjacentHTML('afterend', '<p id="menubar-clock"></p>');
-  setInterval(function(){
-    // console.log("Run");
-    let time = new Date();
-    document.querySelector("#menubar-clock").innerHTML = time.toLocaleTimeString("en-US");
-  }, 500);
 }
 
 

@@ -20,41 +20,18 @@
     <div id="desktop">
       <div id="background"></div>
       <div id="hello-container">
-        <h1 class="hello-text" onclick="doThing()">Hello!</h1>
+        <h1 class="hello-text">Hello!</h1>
         <h1 class="hello-text">My name is Andy!</h1>
         <p id="description">I do nerd stuff, I guess. ¯\_(ツ)_/¯</p>
       </div>
 
-      <!-- <div id="menubar-desktop">
-        <div id="menubar-links">
-          <div class="menu-item" id="menu-item-1" onclick="toggleWindow(1);">About</div>
-          <div class="menu-item" id="menu-item-2" onclick="toggleWindow(2);">Code</div>
-          <div class="menu-item" id="menu-item-3" onclick="toggleWindow(3);">Design</div>
-        </div>
-      </div> -->
-
-      <!-- <div id="menubar-mobile">
-        <div id="menubar-links">
-          <div class="menu-item" id="menu-item-1" onclick="toggleWindow(1);">About</div>
-          <div class="menu-item" id="menu-item-2" onclick="toggleWindow(2);">Code</div>
-          <div class="menu-item" id="menu-item-3" onclick="toggleWindow(3);">Design</div>
-        </div>
-      </div> -->
-
-      <!-- <div id="menubar-mobile">
-        <div class="mobile-menu-item" id="menu-item-about" onclick="toggleWindow(1);">About</div>
-        <div class="mobile-menu-item" id="menu-item-code" onclick="toggleWindow(2);">Code</div>
-        <div class="mobile-menu-item" id="menu-item-design" onclick="toggleWindow(3);">Design</div>
-      </div> -->
-
 			<div class="window-container">
 
-				<div class="window" id="window-1" onmousedown="bringWindowForward(1);">
+				<div class="window" id="window-1">
 					<div class="window-frame">
-						<div class="window-titlebar" id="window-about-titlebar">
-							<h2 class="window-name">About</h2>
-							<span class="material-icons" onclick="closeWindow(1)">close</span>
-						</div>
+            <!-- <div class="window-dragbar" id="window-about-titlebar"></div> -->
+            <h2 class="window-titlebar" id="window-about-titlebar" onmousedown="titlebarMouseDown(1);">About</h2>
+            <!-- <span class="material-icons" onclick="closeWindow(1)">close</span> -->
 					</div>
 					<div class="window-content">
             <div id="about-intro-box">
@@ -139,32 +116,30 @@
 					</div>
 				</div>
 
-				<div class="window" id="window-2" onmousedown="bringWindowForward(2);">
+				<div class="window" id="window-2">
           <div class="window-frame">
-						<div class="window-titlebar" id="window-code-titlebar">
-              <h2 class="window-name">Code</h2>
-              <span class="material-icons" onclick="closeWindow(2)">close</span>
-            </div>
-          </div>
+            <h2 class="window-titlebar" id="window-code-titlebar">Code</h2>
+            <!-- <span class="material-icons" onclick="closeWindow(2)">close</span> -->
+					</div>
           <div class="window-content">
             <div class="collage-container" id="code-collage-container">
               <div class="collage-item">
-                <img src="assets/1.jpg" class="collage-item-image"> 
+                <!-- <img src="assets/1.jpg" class="collage-item-image">  -->
                 <p>Description Lorem ipsum dolor, sit amet.</p>
                 <a href="assets/1.jpg" target="_blank">Test Link</a>
               </div>
               <div class="collage-item">
-                <img src="assets/2.jpg" class="collage-item-image"> 
+                <!-- <img src="assets/2.jpg" class="collage-item-image">  -->
                 <p>Description Lorem ipsum dolor, sit amet.</p>
                 <a href="assets/2.jpg" target="_blank">Test Link</a>
               </div>
               <div class="collage-item">
-                <img src="assets/3.jpg" class="collage-item-image">
+                <!-- <img src="assets/3.jpg" class="collage-item-image"> -->
                 <p>Description Lorem ipsum dolor, sit amet.</p>
                 <a href="assets/3.jpg" target="_blank">Test Link</a> 
               </div>
               <div class="collage-item">
-                <img src="assets/4.jpg" class="collage-item-image"> 
+                <!-- <img src="assets/4.jpg" class="collage-item-image">  -->
                 <p>Description Lorem ipsum dolor, sit amet.</p>
                 <a href="assets/4.jpg" target="_blank">Test Link</a>
               </div>
@@ -172,17 +147,26 @@
 					</div>
         </div>
         
-        <div class="window" id="window-3" onmousedown="bringWindowForward(3);">
+        <div class="window" id="window-3">
           <div class="window-frame">
-						<div class="window-titlebar" id="window-design-titlebar">
-              <h2 class="window-name">Design</h2>
-              <span class="material-icons" onclick="closeWindow(3)">close</span>
-            </div>
-          </div>
+            <h2 class="window-titlebar" id="window-design-titlebar">Design</h2>
+            <!-- <span class="material-icons" onclick="closeWindow(3)">close</span> -->
+					</div>
           <div class="window-content">
 						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas vel doloremque pariatur voluptatibus delectus dolores, quia officiis soluta incidunt, possimus at neque quam dolorem molestias sed reprehenderit, modi deserunt animi!</p>
 					</div>
       	</div>
+
+        <div class="window" id="window-4">
+          <div class="window-frame">
+            <h2 class="window-titlebar" id="window-design-titlebar">Test</h2>
+            <!-- <span class="material-icons" onclick="closeWindow(4)">close</span> -->
+					</div>
+          <div class="window-content">
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas vel doloremque pariatur voluptatibus delectus dolores, quia officiis soluta incidunt, possimus at neque quam dolorem molestias sed reprehenderit, modi deserunt animi!</p>
+					</div>
+      	</div>
+      
 
 			</div>
 
