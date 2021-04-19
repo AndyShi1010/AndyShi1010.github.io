@@ -357,8 +357,9 @@ body {
 #menubar-mobile {
   justify-content: space-between;
   align-items: center;
+  display: block;
   width: 100%;
-  position: fixed;
+  position: absolute;
 }
 
 #menubar-mobile #menubar-links {
