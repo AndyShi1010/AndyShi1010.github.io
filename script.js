@@ -1,14 +1,14 @@
 let mobileView = true;
 
-if (!(navigator.userAgent.match(/Android/i)
- || navigator.userAgent.match(/webOS/i)
- || navigator.userAgent.match(/iPhone/i)
- || navigator.userAgent.match(/iPad/i)
- || navigator.userAgent.match(/iPod/i)
- || navigator.userAgent.match(/BlackBerry/i)
- || navigator.userAgent.match(/Windows Phone/i))) {
-  mobileView = false;
-}
+// if (!(navigator.userAgent.match(/Android/i)
+//  || navigator.userAgent.match(/webOS/i)
+//  || navigator.userAgent.match(/iPhone/i)
+//  || navigator.userAgent.match(/iPad/i)
+//  || navigator.userAgent.match(/iPod/i)
+//  || navigator.userAgent.match(/BlackBerry/i)
+//  || navigator.userAgent.match(/Windows Phone/i))) {
+//   mobileView = false;
+// }
 
 // let windows = [];
 const minWindowZ = 10;
@@ -41,10 +41,10 @@ function initMobileMode() {
     `
     <div class="menubar" id="menubar-mobile">
       <div id="menubar-links">
-        <div class="menu-item" id="menu-item-4" onclick="openWindow(4);"><span class="material-icons">home</span>Test</div>
+        <div class="menu-item" id="menu-item-4" onclick="openWindow(4);"><span class="material-icons">home</span>Home</div>
         <div class="menu-item" id="menu-item-1" onclick="openWindow(1);"><span class="material-icons">person</span>About</div>
-        <div class="menu-item" id="menu-item-2" onclick="openWindow(2);">Code</div>
-        <div class="menu-item" id="menu-item-3" onclick="openWindow(3);">Design</div>
+        <div class="menu-item" id="menu-item-2" onclick="openWindow(2);"><span class="material-icons">code</span>Code</div>
+        <div class="menu-item" id="menu-item-3" onclick="openWindow(3);"><span class="material-icons">design_services</span>Design</div>
       </div>
     </div>
     `);
