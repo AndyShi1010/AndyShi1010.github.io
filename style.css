@@ -219,7 +219,7 @@ body {
   line-height: 1;
   /* background: rgba(0, 96, 223, 0.5); */
   background: rgb(10,10,10);
-  transition: all 0s;
+  transition: all 0.2s;
 }
 
 /* DESKTOP */
@@ -248,7 +248,7 @@ body {
 
 #menubar-desktop .menu-item span {
   margin-right: 12px;
-  font-size: 20px;
+  font-size: 22px;
 }
 
 #menubar-desktop .menu-item:last-of-type {
@@ -321,7 +321,7 @@ body {
   cursor: move;
 }
 
-.window.desktop .window-frame span.material-icons {
+.window.desktop .window-frame span.material-icons-outlined {
   position: absolute;
   top: 0;
   right: 0;
@@ -336,15 +336,15 @@ body {
   transition: 0.2s;
 }
 
-.window.desktop.back .window-frame span.material-icons {
+.window.desktop.back .window-frame span.material-icons-outlined {
   color: rgb(200,200,200);
 }
 
-.window.desktop.back .window-frame span.material-icons:hover {
+.window.desktop.back .window-frame span.material-icons-outlined:hover {
   background: rgba(140,140,140);
 }
 
-.window.desktop.focus .window-frame span.material-icons:hover {
+.window.desktop.focus .window-frame span.material-icons-outlined:hover {
   background: rgba(40,40,40);
 }
 
@@ -360,6 +360,7 @@ body {
   display: block;
   width: 100%;
   position: sticky;
+  background: rgba(10,10,10,1);
 }
 
 #menubar-mobile #menubar-links {
@@ -423,10 +424,11 @@ body {
   height: 50px;
   padding: 0px 20px;
   width: calc(100% - 40px);
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.25);
 }
 
 .window.mobile.focus .window-frame .window-titlebar {
-  background: rgba(10,10,10,0.8);
+  background: rgba(10,10,10,1);
   backdrop-filter: blur(20px);
   color: white;
 }

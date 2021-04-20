@@ -41,10 +41,10 @@ function initMobileMode() {
     `
     <div class="menubar" id="menubar-mobile">
       <div id="menubar-links">
-        <div class="menu-item" id="menu-item-4" onclick="openWindow(4);"><span class="material-icons">home</span>Home</div>
-        <div class="menu-item" id="menu-item-1" onclick="openWindow(1);"><span class="material-icons">person</span>About</div>
-        <div class="menu-item" id="menu-item-2" onclick="openWindow(2);"><span class="material-icons">code</span>Code</div>
-        <div class="menu-item" id="menu-item-3" onclick="openWindow(3);"><span class="material-icons">design_services</span>Design</div>
+        <div class="menu-item" id="menu-item-4" onclick="openWindow(4);"><span class="material-icons-outlined">home</span>Home</div>
+        <div class="menu-item" id="menu-item-1" onclick="openWindow(1);"><span class="material-icons-outlined">person</span>About</div>
+        <div class="menu-item" id="menu-item-2" onclick="openWindow(2);"><span class="material-icons-outlined">code</span>Code</div>
+        <div class="menu-item" id="menu-item-3" onclick="openWindow(3);"><span class="material-icons-outlined">design_services</span>Design</div>
       </div>
     </div>
     `);
@@ -68,7 +68,7 @@ function initDesktopMode() {
     };
     windowDrag(windowObjs[i], windowObjs[i].querySelector(".window-titlebar"));
     windowObjs[i].querySelector(".window-titlebar").insertAdjacentHTML('afterend', `
-    <span class="material-icons" onclick="closeWindow(${i + 1})">close</span>
+    <span class="material-icons-outlined" onclick="closeWindow(${i + 1})">close</span>
     `);
     //console.log(windowObjs[i].getElementsByClassName("window-content"));
   }
@@ -76,9 +76,9 @@ function initDesktopMode() {
   `
   <div class="menubar" id="menubar-desktop">
     <div id="menubar-links">
-      <div class="menu-item" id="menu-item-1" onclick="menuItemClick(1);"><span class="material-icons">person</span>About</div>
-      <div class="menu-item" id="menu-item-2" onclick="menuItemClick(2);"><span class="material-icons">code</span>Code</div>
-      <div class="menu-item" id="menu-item-3" onclick="menuItemClick(3);"><span class="material-icons">design_services</span>Design</div>
+      <div class="menu-item" id="menu-item-1" onclick="menuItemClick(1);"><span class="material-icons-outlined">person</span>About</div>
+      <div class="menu-item" id="menu-item-2" onclick="menuItemClick(2);"><span class="material-icons-outlined">code</span>Code</div>
+      <div class="menu-item" id="menu-item-3" onclick="menuItemClick(3);"><span class="material-icons-outlined">design_services</span>Design</div>
     </div>
   </div>
   `);
