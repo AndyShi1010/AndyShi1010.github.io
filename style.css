@@ -359,7 +359,7 @@ body {
   align-items: center;
   display: block;
   width: 100%;
-  position: absolute;
+  position: sticky;
 }
 
 #menubar-mobile #menubar-links {
