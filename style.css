@@ -116,12 +116,12 @@ body {
   text-align: right;
   z-index: 0;
   margin: 0px;
-  margin-right: 100px;
+  margin-right: 5vw;
   padding: 10px;
   background: white;
   width: fit-content;
   box-shadow: 0px 0px 8px rgba(0,0,0,0.1);
-  font-size: 48px;
+  font-size: max(3vw, 24px);
 }
 
 #hello-container h1:first-of-type {
@@ -131,10 +131,12 @@ body {
 
 #hello-container #description {
   margin: 0;
-  margin-right: 100px;
+  margin-right: 5vw;
+  white-space: normal;
   margin-top: 40px;
-  font-size: 24px;
+  font-size: max(1.5vw, 18px);
   text-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+  text-align: right;
 }
 
 .menubar {
@@ -181,6 +183,16 @@ body {
   height: 100%;
 }
 
+#menubar-clock {
+  font-size: 20px;
+  margin: 0;
+  color: white;
+  font-weight: 600;
+  width: 120px;
+  text-align: center;
+  font-family: 'Arvo', serif;
+}
+
 .window-container {
   position: absolute;
   top: 0;
@@ -225,21 +237,46 @@ body {
 /* DESKTOP */
 
 #menubar-desktop {
-  padding: 6px 12px;
+  padding: 0px 12px;
   justify-content: space-between;
   align-items: center;
 }
 
-#menubar-desktop #menubar-clock {
-  font-size: 20px;
-  margin: 0;
-  color: white;
-  font-weight: 600;
+#menubar-desktop #menubar-tray {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+#menubar-tray #status-icons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+  margin-right: 9px;
+}
+
+#menubar-tray .status-icon-item {
+  padding: 9px;
+  transition: 0.2s;
+}
+
+#menubar-tray .status-icon-item:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+#menubar-tray .status-icon-item img{
+  width: 28px;
+  height: 28px;
+  display: block;
 }
 
 #menubar-desktop .menu-item {
-  width: 140px;
+  width: min(140px, 15vw);
   padding: 9px 12px 9px 12px;
+  margin-top: 6px;
+  margin-bottom: 6px;
   margin-right: 9px;
   align-items: center;
   border: 2px solid rgba(255,255,255,0.2);
@@ -435,10 +472,52 @@ body {
 
 #window-4 .window-titlebar {
   opacity: 0;
+  height: 0px;
 }
 
 #window-4 .window-content {
   background: rgba(255,255,255,0);
+}
+
+#window-4 #mobilehome-tray {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+#mobilehome-tray #menubar-clock {
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(20px);
+  padding: 6px; 
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.25);
+}
+
+#mobilehome-tray #status-icons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+  width: min-content;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(20px); 
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.25);
+}
+
+#mobilehome-tray .status-icon-item {
+  padding: 9px;
+  transition: 0.2s;
+}
+
+#mobilehome-tray .status-icon-item:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+#mobilehome-tray .status-icon-item img{
+  width: 28px;
+  height: 28px;
+  display: block;
 }
 
 /* .window-frame .resize-top, .window-frame .resize-right, .window-frame .resize-bottom, .window-frame .resize-left {
@@ -551,6 +630,20 @@ body {
 .file-download-link {
   background: rgba(230,230,230);
   padding: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: black;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.file-download-link:hover {
+  background: rgba(200,200,200);
+}
+
+.file-download-link span {
+  margin-right: 12px;
 }
 
 @media only screen and (max-width: 680px) {

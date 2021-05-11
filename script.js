@@ -49,10 +49,18 @@ function initMobileMode() {
     </div>
     `);
 
-    for (let i = 0; i < windowObjs.length; i++) {
-      windowObjs[i].classList.add("mobile");
-      windowObjs[i].style.height = "calc(100vh - " + document.getElementById("menubar-mobile").clientHeight + "px)";
-    }
+
+  for (let i = 0; i < windowObjs.length; i++) {
+    windowObjs[i].classList.add("mobile");
+    windowObjs[i].style.height = "calc(100vh - " + document.getElementById("menubar-mobile").clientHeight + "px)";
+  }
+
+  document.getElementById("status-icons").insertAdjacentHTML('afterend', '<p id="menubar-clock"></p>');
+  setInterval(function(){
+    // console.log("Run");
+    let time = new Date();
+    document.querySelector("#menubar-clock").innerHTML = time.toLocaleTimeString("en-US");
+  }, 500);
 }
 
 function initDesktopMode() {
@@ -80,9 +88,17 @@ function initDesktopMode() {
       <div class="menu-item" id="menu-item-2" onclick="menuItemClick(2);"><span class="material-icons-outlined">code</span>Code</div>
       <div class="menu-item" id="menu-item-3" onclick="menuItemClick(3);"><span class="material-icons-outlined">design_services</span>Design</div>
     </div>
+    <div id="menubar-tray">
+      <div id="status-icons">
+        <a class="status-icon-item" href="https://twitter.com/and0shi" target="_blank"><img src="assets/twitter.svg"></a>
+        <a class="status-icon-item" href="https://www.instagram.com/and0shi/" target="_blank"><img src="assets/instagram.svg"></a>
+        <a class="status-icon-item" href="https://www.linkedin.com/in/andy-shi-57984220b/" target="_blank"><img src="assets/linkedin.svg"></a>
+        <a class="status-icon-item" href="https://github.com/AndyShi1010" target="_blank"><img src="assets/github.svg"></a>
+      </div>
+    </div>
   </div>
   `);
-  document.getElementById("menubar-links").insertAdjacentHTML('afterend', '<p id="menubar-clock"></p>');
+  document.getElementById("menubar-tray").insertAdjacentHTML('beforeend', '<p id="menubar-clock"></p>');
   setInterval(function(){
     // console.log("Run");
     let time = new Date();
@@ -314,9 +330,10 @@ function bringWindowForward(id) {
 window.onresize = function() {
   let window1width = document.getElementById("window-1").querySelector(".window-content").clientWidth;
   let window2width = document.getElementById("window-2").querySelector(".window-content").clientWidth;
+  let window3width = document.getElementById("window-3").querySelector(".window-content").clientWidth;
   updateWindow1(window1width);
   updateWindow2(window2width);
-  console.log(window1width);
+  updateWindow3(window3width);
 }
 
 function updateWindow1(width) {
@@ -334,6 +351,16 @@ function updateWindow2(width) {
     document.getElementById("code-collage-container").style.gridTemplateColumns = "auto auto";
   } else {
     document.getElementById("code-collage-container").style.gridTemplateColumns = "auto auto auto";
+  }
+}
+
+function updateWindow3(width) {
+  if (width < 360) {
+    document.getElementById("design-collage-container").style.gridTemplateColumns = "auto";
+  } else if (width < 540) {
+    document.getElementById("design-collage-container").style.gridTemplateColumns = "auto auto";
+  } else {
+    document.getElementById("design-collage-container").style.gridTemplateColumns = "auto auto auto";
   }
 }
 
