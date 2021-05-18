@@ -21,8 +21,8 @@ window.onload = function() {
     document.getElementById("loader").classList.toggle("not-loaded");
     document.getElementById("desktop").classList.toggle("desktop-visible");
   }, 20);
-  let window1width = document.getElementById("window-1").querySelector(".window-content").clientWidth;
-  let window2width = document.getElementById("window-2").querySelector(".window-content").clientWidth;
+  let window1width = document.getElementById("window-1").querySelector(".window-content-main").clientWidth;
+  let window2width = document.getElementById("window-2").querySelector(".window-content-main").clientWidth;
   updateWindow1(window1width);
   updateWindow2(window2width);
   if (!mobileView) {
@@ -49,7 +49,25 @@ function initMobileMode() {
     </div>
     `);
 
-
+  document.querySelector("#window-3").insertAdjacentHTML('afterend',
+    `<div class="window" id="window-4">
+    <div class="window-frame">
+      <h2 class="window-titlebar" id="window-mobilehome-titlebar">Test</h2>
+      <!-- <span class="material-icons" onclick="closeWindow(4)">close</span> -->
+    </div>
+    <div class="window-content-main">
+      <div id="mobilehome-tray">
+        <div id="status-icons">
+          <a class="status-icon-item" href="https://twitter.com/and0shi" target="_blank"><img src="assets/twitter.svg"></a>
+          <a class="status-icon-item" href="https://www.instagram.com/and0shi/" target="_blank"><img src="assets/instagram.svg"></a>
+          <a class="status-icon-item" href="https://www.linkedin.com/in/andy-shi-57984220b/" target="_blank"><img src="assets/linkedin.svg"></a>
+          <a class="status-icon-item" href="https://github.com/AndyShi1010" target="_blank"><img src="assets/github.svg"></a>
+        </div>
+      </div>
+      <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas vel doloremque pariatur voluptatibus delectus dolores, quia officiis soluta incidunt, possimus at neque quam dolorem molestias sed reprehenderit, modi deserunt animi!</p> -->
+    </div>
+    </div>`
+  )
   for (let i = 0; i < windowObjs.length; i++) {
     windowObjs[i].classList.add("mobile");
     windowObjs[i].style.height = "calc(100vh - " + document.getElementById("menubar-mobile").clientHeight + "px)";
@@ -328,9 +346,9 @@ function bringWindowForward(id) {
 // }
 
 window.onresize = function() {
-  let window1width = document.getElementById("window-1").querySelector(".window-content").clientWidth;
-  let window2width = document.getElementById("window-2").querySelector(".window-content").clientWidth;
-  let window3width = document.getElementById("window-3").querySelector(".window-content").clientWidth;
+  let window1width = document.getElementById("window-1").querySelector(".window-content-main").clientWidth;
+  let window2width = document.getElementById("window-2").querySelector(".window-content-main").clientWidth;
+  let window3width = document.getElementById("window-3").querySelector(".window-content-main").clientWidth;
   updateWindow1(window1width);
   updateWindow2(window2width);
   updateWindow3(window3width);
@@ -364,6 +382,20 @@ function updateWindow3(width) {
   }
 }
 
+
+function loadSubpage(id) {
+  switch(id) {
+    case 1:
+      console.log("Load Subpage Switch Case 1");
+      if (!document.querySelector("#window-2").classList.contains("window-content-hidden")) {
+        document.querySelector("#window-2").querySelector(".window-content-main").classList.add("window-content-hidden");
+        document.querySelector("#window-2").querySelector("#window-sub-1").classList.remove("window-content-hidden");
+      }
+      break;
+    default:
+      console.log("Load Subpage Switch Case");
+  }
+}
 
 
 
